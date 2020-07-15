@@ -21,7 +21,24 @@ def sorta(x: int) -> int:
         return -0
     return x
 
-def analisisCoeficientes(C,S,V,I):
+def analisisCoeficientes(C:list,S:list,V:list,I:list):
+    '''
+        Genera los rangos de utilidad para cada variable en el vector V
+        Parametros:
+            C (list(int)): lista con los coeficientes de cada variable
+                           en el problema base
+            S: (list(list(int))): lista con los coeficientes en las
+                           restricciones solucion
+            V (list(str)): lista con las etiquetas para cada variable
+            I (list(str)): lista con las etiquetas para las variables
+                           solucion
+        Return:
+            Lista con tuplas de tres elementos, de la forma:
+                (X, limL, limR)
+            donde X es la etiqueta de la variable, limL es el limite
+            inferior en el rango que puede tomar X y limR es el limite
+            superior en el rango que puede tomar X
+    '''
     ret= []
     for i in range(len(I)):
         if I[i][0] != "X":
@@ -51,16 +68,36 @@ def analisisCoeficientes(C,S,V,I):
         ret.append((I[i],limL,limR))
     return ret
 
-def analisisRecursos(C,A,V,I,b):
+def analisisRecursos(C:list,A:list,V:list,I:list,b:list):
+    '''
+        Genera los rangos de utilidad para cada variable en el vector V
+        Parametros:
+            C (list(int)): lista con los coeficientes de cada variable
+                           en el problema base
+            A: (list(list(int))): lista con los coeficientes en las
+                           restricciones base
+            V (list(str)): lista con las etiquetas para cada variable
+            I (list(str)): lista con las etiquetas para las variables
+                           solucion
+            b (list(int)): lista con los limites en las restricciones
+                           base para cada recurso
+        Return:
+            Lista con tuplas de cuatro elementos, de la forma:
+                (R, limL, limR, PS)
+            donde R es la etiqueta de la variable, limL es el limite
+            inferior en el rango que puede tomar R, limR es el limite
+            superior en el rango que puede tomar R y PS es el precio
+            sombra asociado a R
+    '''
     ret = []
     BI = [[] for i in range(len(I))]
     for i in range(len(I)):
         BI[i] = [A[j][V.index(I[i])] for j in range(len(A))]
     import numpy as np
-    #print(BI)
+    print(BI)
     BI = np.matrix(BI).T.tolist()
     BI = np.matrix(BI).I.tolist()
-    #print(BI)
+    print(BI)
     for i in range(len(b)):
         BIb = [0 for j in b]
         PS = [0 for j in b]  # Precio Sombra

@@ -66,7 +66,6 @@ class Iteracion:
                     comp = i
                 elif O.upper() == "MIN" and i < 0:
                     comp = i
-            print(comp)
         #print("Z Mayor:", comp)
         self.ind = Z.index(comp)
         #print("Z Mayor:", comp)
