@@ -17,12 +17,12 @@ except ImportError:
     from tkinter import ttk
 
 def mkSimplex():
-    #try:
+    try:
         import pickle
         state = open("simplex.txt", "wb")
         pickle.dump(prob, state)
         state.close()
-    #except: pass
+    except: print("No se ha podido guardar")
 
 def gmSimplex():
     try:
@@ -31,11 +31,12 @@ def gmSimplex():
         spx = pickle.load(stated)
         stated.close()
         return spx
-    except:
-        print("No se ha podido cargar ")
+    except: print("No se ha podido cargar ")
 
 def gtP():
     mkSimplex()
+    import InterfazPreSimplex
+    InterfazPreSimplex.main(marco)
 
 def gtS():
     prob.solucionar(1)

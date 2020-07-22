@@ -21,7 +21,6 @@ varS=[]
 varP=[]
 varB=[]
 prob = None
-nextI = None
 
 def smSimplex():
         import pickle
@@ -91,7 +90,7 @@ def gtSt():
         print("ha ocurrido un error inesperado al desarrollar el tablero simplex")
         return'''
     import InterfazIteracion
-    InterfazIteracion.main(nextI)
+    InterfazIteracion.main(marco)
 
 def gtDr():
     mkSimplex()
@@ -100,7 +99,7 @@ def gtDr():
         print("ha ocurrido un error inesperado al desarrollar el tablero simplex")
         return
     import InterfazIteracion
-    InterfazIteracion.main(nextI)
+    InterfazIteracion.main(marco)
 
 def gtAs():
     mkSimplex()
@@ -111,54 +110,79 @@ def gtAs():
     import InterfazProblema
     InterfazProblema.main()
 
-marco = tk.Tk()
-marco.configure(background='#202020')
-marco.title('Planteamiento - Simplex')
-tk.Label(marco, text="Optimizador de soluciones - Grupo 5",bg="#202020",fg="white").grid(row=0, column=0, columnspan=7)
+def mkPln():
+    global frZn, varZn, txtZn, btnZn, frZ, frSn, varSn, txtSn, btnSn, frS, frO, obj, frGt, btnGtS, btnGtD, btnGtA
+    for l in marco.grid_slaves(): l.destroy()
+    marco.configure(background='#202020')
+    marco.title('Planteamiento - Simplex')
+    tk.Label(marco, text="Optimizador de soluciones - Grupo 5",bg="#202020",fg="white").grid(row=0, column=0, columnspan=7)
 
-#parte de Z
-frZn = tk.Frame(marco,bg="#202020")
-frZn.grid(row=1, column=0, columnspan=7)
-tk.Label(frZn, text="Describa la funcion a optimizar:",bg="#202020",fg="white").grid(row=0, column=0, columnspan=7)
-tk.Label(frZn, text="Numero de variables:",bg="#202020",fg="white").grid(row=2, column=0)
-varZn=tk.IntVar()
-txtZn=tk.Entry(frZn,textvariable=varZn)
-txtZn.grid(row=2, column=1)
-btnZn=tk.Button(frZn, text='Construir Z', command=bldZn).grid(row=1, column=2, rowspan=2, columnspan=2)
-frZ = tk.Frame(frZn,bg="#202020")
-frZ.grid(row=1, column=4, columnspan=5, rowspan=2)
+    #parte de Z
+    frZn = tk.Frame(marco,bg="#202020")
+    frZn.grid(row=1, column=0, columnspan=7)
+    tk.Label(frZn, text="Describa la funcion a optimizar:",bg="#202020",fg="white").grid(row=0, column=0, columnspan=7)
+    tk.Label(frZn, text="Numero de variables:",bg="#202020",fg="white").grid(row=2, column=0)
+    varZn=tk.IntVar()
+    txtZn=tk.Entry(frZn,textvariable=varZn)
+    txtZn.grid(row=2, column=1)
+    btnZn=tk.Button(frZn, text='Construir Z', command=bldZn).grid(row=1, column=2, rowspan=2, columnspan=2)
+    frZ = tk.Frame(frZn,bg="#202020")
+    frZ.grid(row=1, column=4, columnspan=5, rowspan=2)
 
-#parte de S
-frSn = tk.Frame(marco,bg="#202020")
-frSn.grid(row=2, column=0, columnspan=7)
-tk.Label(frSn, text="Describa las restricciones:",bg="#202020",fg="white").grid(row=0, column=0, columnspan=7)
-tk.Label(frSn, text="Numero de recursos:",bg="#202020",fg="white").grid(row=1, column=0)
-varSn=tk.IntVar()
-txtSn=tk.Entry(frSn,textvariable=varSn)
-txtSn.grid(row=1, column=1)
-btnSn=tk.Button(frSn, text='Construir tablero S.A.', command=bldSn).grid(row=1, column=2)
-frS = tk.Frame(frSn,bg="#202020")
-frS.grid(row=2, column=0, columnspan=7)
+    #parte de S
+    frSn = tk.Frame(marco,bg="#202020")
+    frSn.grid(row=2, column=0, columnspan=7)
+    tk.Label(frSn, text="Describa las restricciones:",bg="#202020",fg="white").grid(row=0, column=0, columnspan=7)
+    tk.Label(frSn, text="Numero de recursos:",bg="#202020",fg="white").grid(row=1, column=0)
+    varSn=tk.IntVar()
+    txtSn=tk.Entry(frSn,textvariable=varSn)
+    txtSn.grid(row=1, column=1)
+    btnSn=tk.Button(frSn, text='Construir tablero S.A.', command=bldSn).grid(row=1, column=2)
+    frS = tk.Frame(frSn,bg="#202020")
+    frS.grid(row=2, column=0, columnspan=7)
 
-#parte de O
-frO = tk.Frame(marco,bg="#202020")
-frO.grid(row=3, column=0, columnspan=7)
-tk.Label(frO, text="El objetivo es: ",bg="#202020",fg="white").grid(row=0, column=0)
-obj = ttk.Combobox(frO, state="readonly")
-obj["values"] = ["Maximizar", "Minimizar"]
-obj.set("Maximizar")
-obj.grid(row=0, column=1)
+    #parte de O
+    frO = tk.Frame(marco,bg="#202020")
+    frO.grid(row=3, column=0, columnspan=7)
+    tk.Label(frO, text="El objetivo es: ",bg="#202020",fg="white").grid(row=0, column=0)
+    obj = ttk.Combobox(frO, state="readonly")
+    obj["values"] = ["Maximizar", "Minimizar"]
+    obj.set("Maximizar")
+    obj.grid(row=0, column=1)
 
-#parte de goingto
-frGt = tk.Frame(marco,bg="#202020")
-frGt.grid(row=4, column=0, columnspan=7)
-btnGtS=tk.Button(frGt, text='Paso a Paso', command=gtSt).grid(row=0, column=1)
-btnGtD=tk.Button(frGt, text='Solucion directa', command=gtDr).grid(row=0, column=2)
-btnGtA=tk.Button(frGt, text='Solo analisis', command=gtAs).grid(row=0, column=3)
+    #parte de goingto
+    frGt = tk.Frame(marco,bg="#202020")
+    frGt.grid(row=4, column=0, columnspan=7)
+    btnGtS=tk.Button(frGt, text='Paso a Paso', command=gtSt).grid(row=0, column=1)
+    btnGtD=tk.Button(frGt, text='Solucion directa', command=gtDr).grid(row=0, column=2)
+    btnGtA=tk.Button(frGt, text='Solo analisis', command=gtAs).grid(row=0, column=3)
 
-def main():
+marco = None
+
+# componentes
+frZn = None
+varZn = None
+txtZn = None
+btnZn = None
+frZ = None
+frSn = None
+varSn = None
+txtSn = None
+btnSn = None
+frS = None
+frO = None
+obj = None
+frGt = None
+btnGtS = None
+btnGtD = None
+btnGtA = None
+
+def main(orig:None=None):
+    global marco
+    if orig: marco = orig
+    else: marco = tk.Tk()
+    mkPln()
     marco.mainloop()
-    pass
 
 if __name__ == '__main__':
     main()

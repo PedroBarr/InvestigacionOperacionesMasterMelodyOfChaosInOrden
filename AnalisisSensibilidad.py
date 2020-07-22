@@ -18,7 +18,7 @@ def sorta(x: int) -> int:
             indice de ordenamiento
     '''
     if x == "Nan":
-        return -0
+        return -0 # Si es una cadena (str) "Nan" retorna -0 para ordenamiento
     return x
 
 def analisisCoeficientes(C:list,S:list,V:list,I:list):
@@ -39,16 +39,16 @@ def analisisCoeficientes(C:list,S:list,V:list,I:list):
             inferior en el rango que puede tomar X y limR es el limite
             superior en el rango que puede tomar X
     '''
-    ret= []
+    ret= [] # Se crea la lista para los retornos
     for i in range(len(I)):
         if I[i][0] != "X":
-            continue
-        CBB1AC = [j for j in C]
+            continue # Si la variable actual no es una variable base del problema pasa a la siguiente iteracion (sin hacer los calculos)
+        CBB1AC = [j for j in C] # Se crea una lista con los coeficientes de la funcion objetivo
         for j in range(len(C)):
             for k in range(len(I)):
                 if i == k:
-                    continue
-                CBB1AC[j] -= float(S[k][j]*C[V.index(I[k])])
+                    continue # No opera si es la variable que se esta analizando
+                CBB1AC[j] -= float(S[k][j]*C[V.index(I[k])]) # Le resta a cada coeficiente el valor
             #print(CBB1AC)
             if S[i][j] == 0 or i == j:
                 CBB1AC[j] = "Nan"
@@ -84,20 +84,21 @@ def analisisRecursos(C:list,A:list,V:list,I:list,b:list):
         Return:
             Lista con tuplas de cuatro elementos, de la forma:
                 (R, limL, limR, PS)
-            donde R es la etiqueta de la variable, limL es el limite
+            donde R es el numero del recurso, limL es el limite
             inferior en el rango que puede tomar R, limR es el limite
-            superior en el rango que puede tomar R y PS es el precio
-            sombra asociado a R
+            superior en el rango que puede tomar R y PS es valor de Z
+            si R aumenta una unidad
     '''
     ret = []
     BI = [[] for i in range(len(I))]
     for i in range(len(I)):
         BI[i] = [A[j][V.index(I[i])] for j in range(len(A))]
     import numpy as np
-    print(BI)
+    #print(BI)
     BI = np.matrix(BI).T.tolist()
+    #print(BI)
     BI = np.matrix(BI).I.tolist()
-    print(BI)
+    #print(BI)
     for i in range(len(b)):
         BIb = [0 for j in b]
         PS = [0 for j in b]  # Precio Sombra
