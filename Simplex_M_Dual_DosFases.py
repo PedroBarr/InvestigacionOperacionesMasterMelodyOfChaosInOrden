@@ -1,10 +1,13 @@
 #-------------------------------------------------------------------------------
-# Name:        IO1Stuff
-# Purpose:     Nota. Dah!
+# Name:        Modulo de Iteracion Simplex
+# Purpose:     Brindar una vista detallada de la solucion a traves de tablas
+#              simplex correspondientes al problema
 #
-# Author:      Alguien con una mascara de Sujeto Fawkes
+# Authors:      Barrera Alfonso, Pedro 20171020057
+#              González Mendoza, Sebastián 20172020039
+#              Gutiérrez Gómez, Cristian Camilo 20172020046
 #
-# Created:     19/09/1999
+# Created:     19/09/2020
 # Copyright:   (k) Ka-Tet Co. 1999
 # Licence:     <uranus>
 #-------------------------------------------------------------------------------

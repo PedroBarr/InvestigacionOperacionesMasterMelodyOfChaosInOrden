@@ -1,15 +1,17 @@
 #-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
+# Name:        Modulo de Iteracion Simplex
+# Purpose:     Brindar una vista detallada de la solucion a traves de tablas
+#              simplex correspondientes al problema
 #
-# Author:      LAO BARRERA
+# Authors:      Barrera Alfonso, Pedro 20171020057
+#              González Mendoza, Sebastián 20172020039
+#              Gutiérrez Gómez, Cristian Camilo 20172020046
 #
-# Created:     07/06/2020
-# Copyright:   (c) LAO BARRERA 2020
-# Licence:     <your licence>
+# Created:     19/09/2020
+# Copyright:   (k) Ka-Tet Co. 1999
 #-------------------------------------------------------------------------------
 
-try:
+try: # Importa tkinter, con la excepcion por version de python (ver manual de usuario)
     import Tkinter as tk
     from Tkinter import ttk
 except ImportError:

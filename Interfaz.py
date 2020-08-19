@@ -42,8 +42,10 @@ class Interfaz(tk.Tk):
         frame.tkraise()
 
 def main():
-    marco = Interfaz()
-    marco.mainloop()
+    #marco = Interfaz()
+    #marco.mainloop()
+    import InterfazPreSimplex
+    InterfazPreSimplex.main()
     pass
 
 if __name__ == '__main__':
